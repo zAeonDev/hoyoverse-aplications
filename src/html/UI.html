@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HoYoverse Aplications</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: Arial, sans-serif;
+      background: #2547c6;
+      color: white;
+    }
+    /* Contêiner da barra de título */
+    .title-bar {
+      width: 100%;
+      height: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 15px;
+      -webkit-app-region: drag;
+      position: relative;
+      overflow: hidden;
+    }
+    .title-bar::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: url('../images/TitleBar-Background.png');
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: 100%;
+      z-index: -1;
+    }
+    .title-bar::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(to bottom, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.5));
+      pointer-events: none;
+      z-index: -1;
+    }
+    .title-bar .buttons {
+      display: flex;
+      gap: 10px;
+    }
+    .title-bar button {
+      background: none;
+      border: none;
+      cursor: pointer;
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 5px;
+      -webkit-app-region: no-drag;
+    }
+    .title-bar button:hover {
+      background: rgba(255, 255, 255, 0.2);
+    }
+    #close:hover {
+      background: rgb(150, 71, 71);
+    }
+    .title-bar button img {
+      width: 20px;
+      height: 20px;
+      filter: invert(1);
+    }
+    /* Contêiner centralizado para a animação na barra de título */
+    .title-bar .center-content {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+    /* Wrapper para aplicar a escala da animação */
+    .animation-wrapper {
+      transform: scale(0.45);
+      transform-origin: center;
+    }
+    /* Container da animação do buraco negro */
+    .container-animation {
+      position: relative;
+      width: 100px;
+      height: 100px;
+    }
+    .container-animation .gravitational-lens {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(0,0,0,0) 40%, rgba(150,100,255,0.3) 60%, rgba(0,0,0,0) 80%);
+      transform: translate(-50%, -50%);
+      animation: distort 3s infinite ease-in-out;
+    }
+    .container-animation .image {
+      width: 100px;
+      height: 100px;
+      animation: spin 5s linear infinite, glow 2s ease-in-out infinite;
+      border-radius: 50%;
+      opacity: 0.8;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      /* Remove o transform inline para que o keyframe controle a centralização */
+    }
+    .container-animation .logo {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 230px;
+      z-index: 10;
+      opacity: 1;
+      filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.9));
+      animation: pulse 1.5s infinite ease-in-out;
+    }
+    @keyframes spin {
+      0% { transform: translate(-50%, -50%) rotate(0deg); }
+      100% { transform: translate(-50%, -50%) rotate(360deg); }
+    }
+    @keyframes glow {
+      0%, 100% { filter: drop-shadow(0 0 15px rgba(150, 100, 255, 0.7)); }
+      50% { filter: drop-shadow(0 0 30px rgba(150, 100, 255, 1)); }
+    }
+    @keyframes distort {
+      0%, 100% { transform: translate(-50%, -50%) scale(1); }
+      50% { transform: translate(-50%, -50%) scale(1.1); }
+    }
+    @keyframes pulse {
+      0%, 100% { transform: translate(-50%, -50%) scale(1); }
+      50% { transform: translate(-50%, -50%) scale(1.2); }
+    }
+  </style>
+</head>
+<body>
+    <!-- Barra de título -->
+    <div class="title-bar">
+        <!-- Botões à esquerda -->
+        <div class="buttons left-buttons">
+          <button id="settings">
+            <img src="../images/settings.png" alt="Menu">
+          </button>
+          <button id="home">
+            <img src="../images/home.png" alt="Home">
+          </button>
+          <button id="back">
+            <img src="../images/back.png" alt="Voltar">
+          </button>
+          <button id="forward">
+            <img src="../images/forward.png" alt="Avançar">
+          </button>
+          <button id="reload">
+            <img src="../images/reload.png" alt="Reload">
+          </button>
+        </div>
+      
+        <!-- Conteúdo centralizado (animação do buraco negro) -->
+        <div class="center-content">
+          <div class="animation-wrapper">
+            <div class="container-animation">
+                <div class="gravitational-lens"></div>
+                <img src="../images/Icone_Animado.png" class="image" alt="Black Hole">
+                <img src="../images/Logo.png" class="logo" alt="Genshin Aplications Logo">
+            </div>
+          </div>
+        </div>
+      
+        <!-- Botões à direita -->
+        <div class="buttons right-buttons">
+          <button id="minimize">
+            <img src="../images/minimize.png" alt="Minimize">
+          </button>
+          <button id="maximize">
+            <img id="maximize-icon" src="../images/maximize.png" alt="Maximize">
+          </button>
+          <button id="close">
+            <img src="../images/close.png" alt="Close">
+          </button>
+        </div>
+    </div>
+
+  <script>
+    const { ipcRenderer } = require("electron");
+    document.getElementById("home").addEventListener("click", () => {
+      ipcRenderer.send("go-home");
+    });
+    document.getElementById("reload").addEventListener("click", () => {
+      ipcRenderer.send("reload-app");
+    });
+    document.getElementById("back").addEventListener("click", () => {
+      ipcRenderer.send("go-back");
+    });
+    document.getElementById("forward").addEventListener("click", () => {
+      ipcRenderer.send("go-forward");
+    });
+    document.getElementById("minimize").addEventListener("click", () => {
+      ipcRenderer.send("minimize-app");
+    });
+    document.getElementById("maximize").addEventListener("click", () => {
+      ipcRenderer.send("maximize-app");
+    });
+    document.getElementById("close").addEventListener("click", () => {
+      ipcRenderer.send("close-app");
+    });
+    ipcRenderer.on("update-maximize-icon", (event, action) => {
+        const maximizeIcon = document.getElementById("maximize-icon");
+        if (action === "maximize") {
+            maximizeIcon.src = "../images/maximize.png";
+        } else {
+            maximizeIcon.src = "../images/maximize.png";
+        }
+    });
+  </script>
+</body>
+</html>

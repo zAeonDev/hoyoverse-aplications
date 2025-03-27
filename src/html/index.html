@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HoYoverse Aplications</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #1a1b23; /* Fundo escuro */
+            border-radius: 3px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background-color: #3a3c4a; /* Cor principal da scrollbar */
+            border-radius: 3px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background-color: #3a3c4a; /* Cor ao passar o mouse */
+        }
+
+        /* Para Firefox */
+        html {
+            scrollbar-width: thin;
+            scrollbar-color: #3a3c4a #1a1b23;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: transparent;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            color: white;
+        }
+
+        .video-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .video-background video {
+            min-width: 100%;
+            min-height: 100%;
+            object-fit: cover;
+        }
+
+        .video-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+        
+        .video-background video {
+            min-width: 100%;
+            min-height: 100%;
+            object-fit: cover;
+            opacity: 1;
+            transition: opacity 1.5s ease-in-out;
+        }
+
+        .video-background video.fade-out {
+            opacity: 0;
+        }
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.5));
+            z-index: -1;
+        }
+
+        .main-container {
+            width: 85%;
+            max-width: 85%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 5px;
+            padding-bottom: 5px;
+            margin: 5px auto;
+        }
+
+        .links-section {
+            width: 100%;
+            max-width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 0 auto 30px;
+            background: linear-gradient(to bottom, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.4));
+            backdrop-filter: blur(5px);
+            border-radius: 10px;
+            padding: 10px;
+        }
+
+        .section-header {
+            width: 100%;
+            background: linear-gradient(to bottom, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.2));
+            backdrop-filter: blur(5px);
+            padding: 15px 0;
+            text-align: center;
+            margin-bottom: 20px;
+            border-radius: 8px;
+        }
+
+        .section-header h1 {
+            color: #ffe599;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .buttons-container {
+            width: 100%;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 50px;
+            padding: 10px;
+            justify-content: center;
+        }
+
+        .link-button {
+            flex: 0 0 80px;
+            max-width: 80px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-decoration: none;
+            transition: transform 0.3s;
+        }
+
+        .link-button img {
+            width: 100px;
+            height: auto;
+            cursor: pointer;
+            border-radius: 8px;
+        }
+
+        .link-button:hover {
+            transform: translateY(-5px);
+            animation: float 1.5s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        /* Responsividade */
+        @media (max-width: 1200px) {
+            .link-button {
+                flex: 0 0 70px;
+                max-width: 70px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .link-button {
+                flex: 0 0 60px;
+                max-width: 60px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .link-button {
+                flex: 0 0 50px;
+                max-width: 50px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Vídeo de fundo -->
+    <div class="video-background">
+        <video autoplay muted loop id="bg-video">
+            <source src="../images/background-wallpaper-video.mp4" type="video/mp4">
+            Seu navegador não suporta vídeos HTML5.
+        </video>
+    </div>
+    
+    <!-- Overlay para escurecer o vídeo e melhorar legibilidade -->
+    <div class="overlay"></div>
+
+    <!-- Conteúdo principal -->
+    <div class="main-container">
+        <!-- Seção Links Oficiais -->
+        <section class="links-section">
+            <div class="section-header">
+                <h1>OFICIAL</h1>
+            </div>
+            <div class="buttons-container">
+                <a class="link-button" onclick="redirecionar('https://genshin.hoyoverse.com/pt/home')">
+                    <img src="../images/Genshin Impact.png" alt="Genshin Impact">
+                </a>
+                <a class="link-button" onclick="redirecionar('https://www.hoyolab.com/circles/2/27/official?page_type=27&page_sort=events&utm_source=officialweb&utm_medium=toptoolbar&utm_id=2')">
+                    <img src="../images/HoYoLAB.png" alt="HoYoLAB">
+                </a>
+                <a class="link-button" onclick="redirecionar('https://act.hoyolab.com/ys/app/interactive-map/index.html?bbs_presentation_style=no_header&utm_id=2&utm_medium=tool&utm_source=hoyolab&bbs_theme=dark&bbs_theme_device=1&lang=pt-pt#/map/2?shown_types=3&center=3875.61,-10325.61&zoom=-1.50')">
+                    <img src="../images/Mapa Interativo.png" alt="Mapa Interativo">
+                </a>
+                <a class="link-button" onclick="redirecionar('https://act.hoyolab.com/ys/event/calculator-sea/index.html?bbs_presentation_style=fullscreen&bbs_auth_required=true&utm_source=hoyolab&utm_medium=tools&lang=pt-pt&bbs_theme=dark&bbs_theme_device=1#/')">
+                    <img src="../images/Calc. Aprimoramento.png" alt="Calculador de Aprimoramento">
+                </a>
+                <a class="link-button" onclick="redirecionar('https://act.hoyolab.com/ys/event/signin-sea-v3/index.html?act_id=e202102251931481&hyl_auth_required=true&hyl_presentation_style=fullscreen&utm_source=hoyolab&utm_medium=tools&lang=pt-pt&bbs_theme=dark&bbs_theme_device=1')">
+                    <img src="../images/Check-in.png" alt="Check-in">
+                </a>
+                <a class="link-button" onclick="redirecionar('https://genshin.hoyoverse.com/pt/gift')">
+                    <img src="../images/Código de Resgate.png" alt="Código de Resgate">
+                </a>
+            </div>
+        </section>
+
+        <!-- Seção Links Externos -->
+        <section class="links-section">
+            <div class="section-header">
+                <h1>EXTERNO</h1>
+            </div>
+            <div class="buttons-container">
+                <div class="link-button">
+                    <img src="../images/Enka. Network.png" alt="Enka. Network" onclick="redirecionar('https://enka.network/')">
+                </div>
+                <div class="link-button">
+                    <img src="../images/Honey Impact.png" alt="Honey Impact" onclick="redirecionar('https://gensh.honeyhunterworld.com/?lang=PT')">
+                </div>
+                <div class="link-button">
+                    <img src="../images/Keqing Mains.png" alt="Keqing Mains" onclick="redirecionar('https://keqingmains.com/')">
+                </div>
+                <div class="link-button">
+                    <img src="../images/Genshin Leaks.png" alt="Genshin Leaks" onclick="redirecionar('https://www.reddit.com/r/Genshin_Impact_Leaks/')">
+                </div>
+                <div class="link-button">
+                    <img src="../images/Genshin Optimizer.png" alt="Genshin Optimizer" onclick="redirecionar('https://frzyc.github.io/genshin-optimizer/#/characters')">
+                </div>
+                <div class="link-button">
+                    <img src="../images/Akasha System.png" alt="Akasha Sistem" onclick="redirecionar('https://akasha.cv/')">
+                </div>
+            </div>
+
+        </section>
+
+    </div>
+
+    <script>
+        function redirecionar(url) {
+            window.open(url, '_blank');
+        }
+    
+        // Controle suave do vídeo de fundo
+        document.addEventListener('DOMContentLoaded', function() {
+            const video = document.getElementById('bg-video');
+            
+            // Configuração do vídeo
+            video.playbackRate = 0.85; // Deixa o vídeo mais lento
+            
+            // Suavizar o loop
+            video.addEventListener('timeupdate', function() {
+                // Quando faltar 2 segundos para acabar, começa a transição
+                if (video.currentTime > video.duration - 2) {
+                    video.classList.add('fade-out');
+                    
+                    // Reinicia o vídeo suavemente
+                    setTimeout(() => {
+                        video.currentTime = 0;
+                        video.classList.remove('fade-out');
+                    }, 1500);
+                }
+            });
+    
+            // Fallback para autoplay
+            video.play().catch(e => {
+                console.log("Autoplay não permitido, tentando play com mute");
+                video.muted = true;
+                video.play();
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HoYoverse Aplications</title>
+  <style>
+    /* Reset básico */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      color: #ffffff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      padding: 20px;
+      overflow: hidden; /* Impede a rolagem da página */
+      position: relative; /* Permite posicionar o vídeo de fundo */
+    }
+
+    /* Vídeo de fundo */
+    #background-video {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover; /* Cobrir toda a área do body */
+      z-index: -1; /* Coloca o vídeo atrás do conteúdo */
+    }
+
+    .update-container {
+      background-color: rgba(45, 45, 45, 0.5); /* Fundo com 50% de opacidade */
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+      width: 100%;
+      max-width: 400px;
+      padding: 24px;
+      text-align: center;
+      position: relative; /* Garante que o conteúdo fique acima do vídeo */
+    }
+
+    .update-header {
+      margin-bottom: 20px;
+    }
+
+    .update-header h1 {
+      font-size: 24px;
+      margin-bottom: 8px;
+    }
+
+    .update-header p {
+      font-size: 14px;
+      color: #ffffff;
+    }
+
+    .update-progress {
+      margin-bottom: 20px;
+    }
+
+    .progress-bar {
+      background-color: rgba(68, 68, 68, 0.50);
+      border-radius: 8px;
+      height: 10px;
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      background-color: #fe6f23;
+      height: 100%;
+      width: 0;
+      border-radius: 8px;
+      transition: width 0.3s ease;
+    }
+
+    .progress-text {
+      display: block;
+      text-align: center;
+      margin-top: 8px;
+      font-size: 14px;
+      color: #ffffff;
+    }
+
+    /* Spinner moderno */
+    .modern-spinner {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: conic-gradient(
+        from 0deg,
+        #7a06ff,
+        #ff00cc,
+        #ff0066,
+        #ff0000,
+        #ff6600,
+        #ffcc00,
+        #7a06ff
+      );
+      mask: radial-gradient(transparent 55%, #000 56%); /* Cria um "buraco" no centro */
+      -webkit-mask: radial-gradient(transparent 55%, #000 56%); /* Suporte para navegadores WebKit */
+      animation: spin 1.5s linear infinite;
+      position: relative;
+      margin: 0 auto; /* Centraliza o spinner */
+    }
+
+    /* Efeito de brilho ao redor do spinner */
+    .modern-spinner::after {
+      content: '';
+      position: absolute;
+      top: -5px;
+      left: -5px;
+      right: -5px;
+      bottom: -5px;
+      background: conic-gradient(
+        from 0deg,
+        #7a06ff,
+        #ff00cc,
+        #ff0066,
+        #ff0000,
+        #ff6600,
+        #ffcc00,
+        #7a06ff
+      );
+      border-radius: 50%;
+      filter: blur(10px); /* Efeito de brilho */
+      z-index: -1;
+      opacity: 0.7;
+    }
+
+    /* Animação de rotação */
+    @keyframes spin {
+      0% {
+        transform: rotate(0deg);
+      }
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+
+    /* Estilos responsivos para telas menores */
+    @media (max-width: 600px) {
+      .update-container {
+        padding: 16px;
+      }
+
+      .update-header h1 {
+        font-size: 20px;
+      }
+
+      .update-header p {
+        font-size: 12px;
+      }
+
+      .progress-text {
+        font-size: 12px;
+      }
+    }
+
+    @media (max-width: 400px) {
+      .update-container {
+        max-width: 90%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Vídeo de fundo -->
+  <video id="background-video" autoplay muted loop>
+    <source src="../images/background-video.mp4" type="video/mp4">
+  </video>
+
+  <!-- Conteúdo da atualização -->
+  <div class="update-container">
+    <div class="update-card">
+      <div class="update-header">
+        <h1>Atualização Disponível</h1>
+        <div id="update-status">
+          <div class="modern-spinner"></div> <!-- Spinner moderno -->
+        </div>
+      </div>
+      <div class="update-progress">
+        <div class="progress-bar">
+          <div class="progress-fill" id="progress-fill"></div>
+        </div>
+        <span class="progress-text" id="progress-text">0%</span>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    require("../javascript/update.js");
+  </script>
+</body>
+</html>

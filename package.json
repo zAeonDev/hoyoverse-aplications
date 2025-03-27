@@ -1,0 +1,49 @@
+{
+  "name": "hoyoverse-aplications",
+  "version": "1.0.1",
+  "description": "HoYoverse Aplications",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "pack": "electron-builder --dir",
+    "dist": "electron-builder",
+    "publish": "dotenv -e .env -- electron-builder --publish=always"
+  },
+  "author": "Aeon",
+  "license": "MIT",
+  "devDependencies": {
+    "dotenv-cli": "^8.0.0",
+    "electron": "^35.0.3",
+    "electron-builder": "^25.1.8"
+  },
+  "build": {
+    "asar": true,
+    "appId": "hoyoverse-aplications",
+    "productName": "HoYoverse Aplications",
+    "directories": {
+      "output": "dist"
+    },
+    "files": [
+      "main.js",
+      "package.json",
+      "icon.ico",
+      "src/**/*"
+    ],
+    "win": {
+      "target": "nsis",
+      "icon": "build/icon.ico"
+    },
+    "publish": [
+      {
+        "provider": "github",
+        "owner": "seu nome de usuario no github",
+        "repo": "nome do seu repositório"
+      }
+    ]
+  },
+  "dependencies": {
+    "@ghostery/adblocker-electron": "^2.5.0",
+    "cross-fetch": "^4.1.0",
+    "electron-updater": "^6.3.9"
+  }
+}

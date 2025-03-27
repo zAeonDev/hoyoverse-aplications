@@ -1,0 +1,9 @@
+# Diretórios de dependências e builds
+node_modules/
+dist/
+
+# Arquivos do npm
+package-lock.json
+
+# Outros arquivos que você queira ignorar
+.env
