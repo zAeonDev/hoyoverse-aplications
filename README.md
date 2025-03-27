@@ -18,4 +18,4 @@ Veja as [tags neste repositório](https://github.com/zAeonDev/hoyoverse-aplicati
 
 ## Licença
 
-Este projeto é licenciado sob a Licença MIT - veja o arquivo [LICENSE.md](LICENSE.md) para detalhes.
+Este projeto é licenciado sob a Licença MIT - veja o arquivo [LICENSE](LICENSE) para detalhes.
