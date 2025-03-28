@@ -3,15 +3,11 @@
 HoYoverse Aplications tem a finalidade de facilitar o acesso a informações sobre os seguintes jogos: Genshin Impact, Honkai: Star Rail e Zenless Zone Zero.
 
 **índice**
-* [Download]()
-* [Versões]()
-* [Criador]()
-* [Licença]()
-
-* [Área do Desenvolvedor]()
-* [Dependências]()
-* [Configuração do package.json]()
-* [Comandos]()
+* [Download](https://github.com/zAeonDev/hoyoverse-aplications?tab=readme-ov-file#download)
+* [Versões](https://github.com/zAeonDev/hoyoverse-aplications?tab=readme-ov-file#vers%C3%B5es)
+* [Criador](https://github.com/zAeonDev/hoyoverse-aplications?tab=readme-ov-file#criador)
+* [Licença](https://github.com/zAeonDev/hoyoverse-aplications?tab=readme-ov-file#criador)
+* [Área do Desenvolvedor](https://github.com/zAeonDev/hoyoverse-aplications?tab=readme-ov-file#criador)
 
 ## Download
 
