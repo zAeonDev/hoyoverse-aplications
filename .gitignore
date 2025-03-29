@@ -3,6 +3,7 @@ node_modules/
 dist/
 
 # Arquivos do npm
+package.json
 package-lock.json
 
 # Outros arquivos que você queira ignorar
