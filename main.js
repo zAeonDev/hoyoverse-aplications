@@ -32,8 +32,8 @@ const adjustViewBounds = () => {
 
 const createMainWindow = () => {
     mainWindow = new BrowserWindow({
-        width: 1000,
-        height: 615,
+        width: 1050,
+        height: 650,
         zoomFactor: 1.0,
         icon: path.join(__dirname, "icon.ico"),
         frame: false,
@@ -64,7 +64,7 @@ const createMainWindow = () => {
             view.webContents.loadURL(url);
             return { action: 'deny' };
         });
-        view.webContents.loadURL(`file://${path.join(__dirname, "src", "html", "index.html")}`);
+        view.webContents.loadURL(`file://${path.join(__dirname, "src", "html", "genshin-impact.html")}`);
         mainWindow.maximize();
         mainWindow.show();
     }).catch(err => {
@@ -144,7 +144,7 @@ const setupIpcHandlers = () => {
 
     ipcMain.on("go-home", () => {
         if (view) {
-            view.webContents.loadURL(`file://${path.join(__dirname, "src", "html", "index.html")}`);
+            view.webContents.loadURL(`file://${path.join(__dirname, "src", "html", "genshin-impact.html")}`);
         }
     });
 
@@ -239,6 +239,11 @@ autoUpdater.on("error", (error) => {
 app.whenReady().then(async () => {
     const blocker = await ElectronBlocker.fromPrebuiltAdsAndTracking(fetch);
     blocker.enableBlockingInSession(session.defaultSession);
+
+    app.setLoginItemSettings({
+        openAtLogin: true, // Inicia o app ao ligar o PC
+        path: app.getPath("exe"), // Caminho do executável
+    });
 
     // Primeiro verifica atualizações
     checkForUpdates();

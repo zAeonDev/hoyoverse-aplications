@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HoYoverse Applications</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: rgba(20, 20, 30, 0.5);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #4e5d94;
+            border-radius: 3px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #5d6da3;
+        }
+
+        body {
+            background-color: transparent;
+            color: #e0e0e0;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Efeito de vídeo de fundo */
+        .video-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -3;
+            overflow: hidden;
+            box-shadow: inset 0 0 150px rgba(0, 0, 0, 0.9);
+        }
+
+        .video-background video {
+            min-width: 100%;
+            min-height: 100%;
+            object-fit: cover;
+            opacity: 1;
+            transition: opacity 1.5s ease;
+        }
+
+        .video-background video.fade-out {
+            opacity: 0;
+        }
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.5));
+            z-index: -1;
+            backdrop-filter: blur(2px);
+        }
+
+        /* Container principal */
+        .main-container {
+            width: 95%;
+            max-width: 1200px;
+            margin: 15px auto;
+            padding: 15px;
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        /* Menu */
+        .nav-menu {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 25px;
+        }
+
+        .nav-list {
+            display: flex;
+            list-style: none;
+            background: rgba(30, 35, 60, 0.4);
+            backdrop-filter: blur(10px);
+            border-radius: 50px;
+            padding: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+        }
+
+        .nav-item {
+            margin: 0 10px;
+        }
+
+        .nav-link {
+            color: #e0e0e0;
+            text-decoration: none;
+            font-size: 0.95rem;
+            padding: 8px 20px;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            display: block;
+        }
+
+        .nav-link:hover, .nav-link.active {
+            background: rgba(78, 93, 148, 0.6);
+            color: #ffe599;
+        }
+        
+        /* Seções de links */
+        .links-section {
+            background: rgba(30, 35, 60, 0.4);
+            backdrop-filter: blur(10px);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 25px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25);
+        }
+
+        .section-title {
+            font-size: clamp(1.1rem, 3.5vw, 1.4rem);
+            color: #a7c4ff;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        /* Container de botões */
+        .buttons-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, auto));
+            gap: 25px;
+            padding: 10px;
+            justify-content: center;
+        }
+
+        /* Botões de link */
+        .link-button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 120px;
+            height: 120px;
+            transition: all 0.3s ease;
+            background: transparent;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .link-button img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            transition: all 0.3s ease;
+            filter: drop-shadow(0 2px 5px rgba(0, 0, 0, 0.3));
+        }
+
+        .link-button:hover {
+            transform: translateY(-5px) scale(1.05);
+            filter: drop-shadow(0 5px 15px rgba(0, 0, 0, 0.4));
+        }
+
+        /* Animações */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Ajustes para telas médias */
+        @media (max-width: 992px) {
+            .buttons-container {
+                grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+                gap: 20px;
+            }
+            
+            .link-button {
+                width: 100px;
+                height: 100px;
+            }
+        }
+
+        /* Ajustes para tablets */
+        @media (max-width: 768px) {
+            .nav-list {
+                flex-wrap: wrap;
+                justify-content: center;
+                border-radius: 12px;
+                padding: 6px;
+            }
+            
+            .nav-item {
+                margin: 4px;
+            }
+            
+            .nav-link {
+                padding: 6px 15px;
+                font-size: 0.85rem;
+            }
+            
+            .buttons-container {
+                grid-template-columns: repeat(auto-fill, minmax(85px, 1fr));
+                gap: 15px;
+            }
+            
+            .link-button {
+                width: 85px;
+                height: 85px;
+            }
+        }
+
+        /* Ajustes para smartphones */
+        @media (max-width: 480px) {
+            .nav-list {
+                border-radius: 8px;
+            }
+            
+            .nav-link {
+                padding: 5px 12px;
+                font-size: 0.8rem;
+            }
+            
+            .buttons-container {
+                grid-template-columns: repeat(auto-fill, minmax(75px, 1fr));
+                gap: 12px;
+            }
+            
+            .link-button {
+                width: 75px;
+                height: 75px;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <!-- Vídeo de fundo com sombra -->
+    <div class="video-background">
+        <video autoplay muted loop id="bg-video">
+            <source src="../images/background-wallpaper-video.mp4" type="video/mp4">
+            Seu navegador não suporta vídeos HTML5.
+        </video>
+    </div>
+    
+    <!-- Overlay para escurecer o vídeo -->
+    <div class="overlay"></div>
+    <!-- Conteúdo principal -->
+    <div class="main-container">
+        <!-- Menu -->
+        <nav class="nav-menu">
+            <ul class="nav-list">
+                <li class="nav-item"><a href="./genshin-impact.html" class="nav-link active">Genshin Impact</a></li>
+                <li class="nav-item"><a href="./honkai-star-rail.html" class="nav-link">Honkai: Star Rail</a></li>
+                <li class="nav-item"><a href="./zenless-zone-zero.html" class="nav-link">Zenless Zone Zero</a></li>
+            </ul>
+        </nav>
+
+        <!-- Seção Links Oficiais -->
+        <section class="links-section">
+            <h2 class="section-title"><i class="fas fa-check-circle"></i> OFICIAL</h2>
+            <div class="buttons-container">
+                <a class="link-button" onclick="redirecionar('https://genshin.hoyoverse.com/pt/home')">
+                    <img src="../images/Genshin Impact.png" alt="Genshin Impact">
+                </a>
+                <a class="link-button" onclick="redirecionar('https://www.hoyolab.com/circles/2/27/official?page_type=27&page_sort=events&utm_source=officialweb&utm_medium=toptoolbar&utm_id=2')">
+                    <img src="../images/HoYoLAB.png" alt="HoYoLAB">
+                </a>
+                <a class="link-button" onclick="redirecionar('https://act.hoyolab.com/ys/app/interactive-map/index.html?bbs_presentation_style=no_header&utm_id=2&utm_medium=tool&utm_source=hoyolab&bbs_theme=dark&bbs_theme_device=1&lang=pt-pt#/map/2?shown_types=3&center=3875.61,-10325.61&zoom=-1.50')">
+                    <img src="../images/Mapa Interativo.png" alt="Mapa Interativo">
+                </a>
+                <a class="link-button" onclick="redirecionar('https://act.hoyolab.com/ys/event/calculator-sea/index.html?bbs_presentation_style=fullscreen&bbs_auth_required=true&utm_source=hoyolab&utm_medium=tools&lang=pt-pt&bbs_theme=dark&bbs_theme_device=1#/')">
+                    <img src="../images/Calc. Aprimoramento.png" alt="Calculador de Aprimoramento">
+                </a>
+                <a class="link-button" onclick="redirecionar('https://act.hoyolab.com/ys/event/signin-sea-v3/index.html?act_id=e202102251931481&hyl_auth_required=true&hyl_presentation_style=fullscreen&utm_source=hoyolab&utm_medium=tools&lang=pt-pt&bbs_theme=dark&bbs_theme_device=1')">
+                    <img src="../images/Check-in.png" alt="Check-in">
+                </a>
+                <a class="link-button" onclick="redirecionar('https://genshin.hoyoverse.com/pt/gift')">
+                    <img src="../images/Código de Resgate.png" alt="Código de Resgate">
+                </a>
+            </div>
+        </section>
+
+        <!-- Seção Links Externos -->
+        <section class="links-section">
+            <h2 class="section-title"><i class="fas fa-external-link-alt"></i> EXTERNO</h2>
+            <div class="buttons-container">
+                <a class="link-button" onclick="redirecionar('https://enka.network/')">
+                    <img src="../images/Enka. Network.png" alt="Enka. Network">
+                </a>
+                <a class="link-button" onclick="redirecionar('https://gensh.honeyhunterworld.com/?lang=PT')">
+                    <img src="../images/Honey Impact.png" alt="Honey Impact">
+                </a>
+                <a class="link-button" onclick="redirecionar('https://keqingmains.com/')">
+                    <img src="../images/Keqing Mains.png" alt="Keqing Mains">
+                </a>
+                <a class="link-button" onclick="redirecionar('https://www.reddit.com/r/Genshin_Impact_Leaks/')">
+                    <img src="../images/Reddit.png" alt="Genshin Leaks">
+                </a>
+                <a class="link-button" onclick="redirecionar('https://frzyc.github.io/genshin-optimizer/#/characters')">
+                    <img src="../images/Genshin Optimizer.png" alt="Genshin Optimizer">
+                </a>
+                <a class="link-button" onclick="redirecionar('https://akasha.cv/')">
+                    <img src="../images/Akasha System.png" alt="Akasha Sistem">
+                </a>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        function redirecionar(url) {
+            window.open(url, '_blank');
+        }
+    
+        document.addEventListener('DOMContentLoaded', function() {
+            const video = document.getElementById('bg-video');
+            video.playbackRate = 0.85;
+            
+            video.addEventListener('timeupdate', function() {
+                if (video.currentTime > video.duration - 2) {
+                    video.classList.add('fade-out');
+                    setTimeout(() => {
+                        video.currentTime = 0;
+                        video.classList.remove('fade-out');
+                    }, 1500);
+                }
+            });
+    
+            video.play().catch(e => {
+                console.log("Autoplay não permitido, tentando play com mute");
+                video.muted = true;
+                video.play();
+            });
+
+            navLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    // Se você deseja redirecionar, pode remover ou comentar a linha abaixo:
+                    // e.preventDefault();
+
+                    navLinks.forEach(l => l.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    // Redireciona para a URL do link:
+                    window.location.href = this.href;
+                });
+            });
+
+        });
+    </script>
+</body>
+</html>
